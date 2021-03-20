@@ -1,38 +1,45 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;1,300&display=swap');
+
+
+/* Classes de estilizações gerais do site */
+*{
+  font-family: 'Montserrat',sans-serif;
+}
+/* Fim das classes de estilizações gerais do site*/
+
+/* Classes de estilização do cabeçalho do site */
+.borda-cabecalho{
+  border-bottom-color: #99ff978f;
+  border-bottom-style: solid;
+  border-bottom-width: 10px;
+  height: 10vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Fim das classes de estilização do cabeçalho */
+
+/* Classes de estilização do rodapé do site */
+
+.rodape{
+  background-color: #99ff978f;
+  border-top-style: solid;
+  border-top-width: thin;
+}
+.container-rodape{
+  text-align: -webkit-center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.tabela-rodape{
+  height: 5vh;
+}
+.celula-rodape{
+  padding-bottom: 15px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+/* Fim das classes de estilização do rodapé */
 
-.App-link {
-  color: #61dafb;
+/* Classes de estilização do corpo do site */
+.corpo{
+  background-image: linear-gradient( rgb(240, 240, 238),rgb(240, 240, 238), #99ff978f);
+  height: 85vh;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* Fim das classes de estilização do corpo */
