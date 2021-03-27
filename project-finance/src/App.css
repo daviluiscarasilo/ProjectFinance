@@ -13,6 +13,13 @@
   border-bottom-style: solid;
   border-bottom-width: 10px;
   height: 10vh;
+  text-align: center;
+}
+
+.pesquisa{
+  background-image: linear-gradient( rgb(240, 240, 238),rgb(240, 240, 238));
+  height: 8vh;
+
 }
 
 /* Fim das classes de estilização do cabeçalho */
@@ -40,6 +47,7 @@
 /* Classes de estilização do corpo do site */
 .corpo{
   background-image: linear-gradient( rgb(240, 240, 238),rgb(240, 240, 238), #99ff978f);
-  height: 85vh;
+  height: 75vh;
+  
 }
 /* Fim das classes de estilização do corpo */
