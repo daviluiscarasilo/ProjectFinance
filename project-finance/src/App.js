@@ -39,6 +39,24 @@ function App() {
     , { value: 'XRP-BRL', label: 'XRP-BRL (Ripple)' }
   ]
 
+  const opcoesIndicadores = [
+    { value: 'USD-BRL', label: 'USD-BRL (Dólar Comercial)' }
+    , { value: 'USDT-BRL', label: 'USDT-BRL (Dólar Turismo)' }
+    , { value: 'CAD-BRL', label: 'CAD-BRL (Dólar Canadense)' }
+    , { value: 'AUD-BRL', label: 'AUD-BRL (Dólar Australiano)' }
+    , { value: 'EUR-BRL', label: 'EUR-BRL (Euro)' }
+    , { value: 'GBP-BRL', label: 'GBP-BRL (Libra Esterlina)' }
+    , { value: 'ARS-BRL', label: 'ARS-BRL (Peso Argentino)' }
+    , { value: 'JPY-BRL', label: 'JPY-BRL (Iene Japonês)' }
+    , { value: 'CHF-BRL', label: 'CHF-BRL (Franco Suíço)' }
+    , { value: 'CNY-BRL', label: 'CNY-BRL (Yuan Chinês)' }
+    , { value: 'YLS-BRL', label: 'YLS-BRL (Novo Shekel Israelense)' }
+    , { value: 'BTC-BRL', label: 'BTC-BRL (Bitcoin)' }
+    , { value: 'LTC-BRL', label: 'LTC-BRL (Litecoin)' }
+    , { value: 'ETH-BRL', label: 'ETH-BRL (Ethereum)' }
+    , { value: 'XRP-BRL', label: 'XRP-BRL (Ripple)' }
+  ]
+
 
   const [erroValidacaoCampos, setErroValidacaoCampos] = useState("");
   const [erro, setErro] = useState("");
@@ -125,35 +143,12 @@ function App() {
             <Container className="container-cabecalho">
               <Row className="align-items-center row-text-align-center">
                 <Col xs="3" >
-                  <div class="card-body">
-                    <label>Moeda</label>
-                    <select className="custom-select mr-sm-2" onChange={function (event) {
-                      setMoeda(event.target.value);
-                      setMoedaTexto(event.target.value);
-                    }}>
-                      {(moedaTexto &&
-                        <option value="">{ }</option>)
-                        ||
-                        <option value="">Escolha uma opção</option>
-
-                      }
-                      <option value="USD-BRL">USD-BRL (Dólar Comercial)</option>
-                      <option value="USDT-BRL">USDT-BRL (Dólar Turismo)</option>
-                      <option value="CAD-BRL">CAD-BRL (Dólar Canadense)</option>
-                      <option value="AUD-BRL">AUD-BRL (Dólar Australiano)</option>
-                      <option value="EUR-BRL">EUR-BRL (Euro)</option>
-                      <option value="GBP-BRL">GBP-BRL (Libra Esterlina)</option>
-                      <option value="ARS-BRL">ARS-BRL (Peso Argentino)</option>
-                      <option value="JPY-BRL">JPY-BRL (Iene Japonês)</option>
-                      <option value="CHF-BRL">CHF-BRL (Franco Suíço)</option>
-                      <option value="CNY-BRL">CNY-BRL (Yuan Chinês)</option>
-                      <option value="YLS-BRL">YLS-BRL (Novo Shekel Israelense)</option>
-                      <option value="BTC-BRL">BTC-BRL (Bitcoin)</option>
-                      <option value="LTC-BRL">LTC-BRL (Litecoin)</option>
-                      <option value="ETH-BRL">ETH-BRL (Ethereum)</option>
-                      <option value="XRP-BRL">XRP-BRL (Ripple)</option>
-                    </select>
-                  </div>
+                  <label>Moeda</label>
+                  {/*TODO CORRIGIR PARAMETRO E DEFINIR PROPRIEDAE VALUE NO SELECT PARA PODER MANTER A SESSÃO DA PROPRIEDADE
+                   MÉTODO SET MOEDA  */}
+                  <Select  options={opcoesMoeda}
+                    onChange={(event) => setMoeda(event.target.value)}
+                  />
                 </Col>
                 <Col xs="2">
                   <label>Data Inicial</label>
