@@ -12,7 +12,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import Toast from 'react-bootstrap/Toast'
 import moment from 'moment'
 
-
+/**
+ * Essa função contém as diretrizes de configuração e integração com o API
+ * @returns Validação de dados e Relatório
+ */
 function App() {
 
   const [erroValidacaoCampos, setErroValidacaoCampos] = useState("");
@@ -25,8 +28,8 @@ function App() {
   const [indicadorTexto, setIndicadorTexto] = useState("");
   const [dadosRelatorio, setDadosRelatorio] = useState({});
 
-  function TimestampParaData(timestamp){
-    var t = new Date( parseInt(timestamp));
+  function TimestampParaData(timestamp) {
+    var t = new Date(parseInt(timestamp));
     return t;
   }
   function ValidaDadosObrigatorios() {
