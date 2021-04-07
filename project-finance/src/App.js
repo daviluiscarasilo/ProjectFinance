@@ -14,6 +14,8 @@ import Button from 'react-bootstrap/Button'
 import "react-datepicker/dist/react-datepicker.css";
 import Toast from 'react-bootstrap/Toast'
 import moment from 'moment'
+import { Chart } from 'react-charts'
+import { da } from 'date-fns/locale';
 
 /**
  * Essa função contém as diretrizes de configuração e integração com o API
@@ -23,6 +25,7 @@ function App() {
   useEffect(() => {
 
   })
+
 
   const opcoesMoeda = [
     { value: 'USD-BRL', label: 'USD-BRL (Dólar Comercial)' }
@@ -42,22 +45,12 @@ function App() {
     , { value: 'XRP-BRL', label: 'XRP-BRL (Ripple)' }
   ]
 
-  const opcoesIndicadores = [
-    { value: 'USD-BRL', label: 'USD-BRL (Dólar Comercial)' }
-    , { value: 'USDT-BRL', label: 'USDT-BRL (Dólar Turismo)' }
-    , { value: 'CAD-BRL', label: 'CAD-BRL (Dólar Canadense)' }
-    , { value: 'AUD-BRL', label: 'AUD-BRL (Dólar Australiano)' }
-    , { value: 'EUR-BRL', label: 'EUR-BRL (Euro)' }
-    , { value: 'GBP-BRL', label: 'GBP-BRL (Libra Esterlina)' }
-    , { value: 'ARS-BRL', label: 'ARS-BRL (Peso Argentino)' }
-    , { value: 'JPY-BRL', label: 'JPY-BRL (Iene Japonês)' }
-    , { value: 'CHF-BRL', label: 'CHF-BRL (Franco Suíço)' }
-    , { value: 'CNY-BRL', label: 'CNY-BRL (Yuan Chinês)' }
-    , { value: 'YLS-BRL', label: 'YLS-BRL (Novo Shekel Israelense)' }
-    , { value: 'BTC-BRL', label: 'BTC-BRL (Bitcoin)' }
-    , { value: 'LTC-BRL', label: 'LTC-BRL (Litecoin)' }
-    , { value: 'ETH-BRL', label: 'ETH-BRL (Ethereum)' }
-    , { value: 'XRP-BRL', label: 'XRP-BRL (Ripple)' }
+  const opcoesIndicador = [
+    { value: 'bid', label: 'Valor de compra' }
+    , { value: 'ask', label: 'Valor de venda' }
+    , { value: 'high', label: 'Valor Máximo' }
+    , { value: 'low', label: 'Valor Mínimo' }
+    , { value: 'pctChange', label: 'Variação %' }
   ]
 
 
@@ -66,13 +59,17 @@ function App() {
   const [dataInicial, setDataInicial] = useState(new Date().setDate(new Date().getDate() - 1));
   const [dataFinal, setDataFinal] = useState(new Date());
   const [moeda, setMoeda] = useState("");
-  const [moedaTexto, setMoedaTexto] = useState("");
+  const [moedaOption, setMoedaOption] = useState();
   const [indicador, setIndicador] = useState("");
-  const [indicadorTexto, setIndicadorTexto] = useState("");
-  const [dadosRelatorio, setDadosRelatorio] = useState({});
+  const [indicadorOption, setIndicadorOption] = useState();
+  const [dadosRelatorio, setDadosRelatorio] = useState(null);
+
+
+
 
   function TimestampParaData(timestamp) {
-    var t = new Date(parseInt(timestamp));
+    var t = new Date('1970-01-01 00:00:0');
+    t.setSeconds(parseInt(timestamp))
     return t;
   }
   function ValidaDadosObrigatorios() {
@@ -103,7 +100,7 @@ function App() {
   async function GerarRelatorio() {
     if (ValidaCampos()) {
       var UrlFinance = "https://economia.awesomeapi.com.br/json/daily/" +
-        moeda + `/?start_date=${moment(dataInicial).format("yyyyMMDD")}&end_date=${moment(dataFinal).format("yyyyMMDD")}`
+        moeda + `/30?start_date=${moment(dataInicial).format("yyyyMMDD")}&end_date=${moment(dataFinal).format("yyyyMMDD")}`
 
       await fetch(UrlFinance)
         .then(response => response.json())
@@ -147,10 +144,11 @@ function App() {
               <Row className="align-items-center row-text-align-center">
                 <Col xs="3" >
                   <label>Moeda</label>
-                  {/*TODO CORRIGIR PARAMETRO E DEFINIR PROPRIEDAE VALUE NO SELECT PARA PODER MANTER A SESSÃO DA PROPRIEDADE
-                   MÉTODO SET MOEDA  */}
-                  <Select  options={opcoesMoeda}
-                    onChange={(event) => setMoeda(event.target.value)}
+                  <Select options={opcoesMoeda}
+                    onChange={
+                      (event) => { setMoedaOption(event); setMoeda(event.value) }
+                    }
+                    value={moedaOption}
                   />
                 </Col>
                 <Col xs="2">
@@ -163,21 +161,12 @@ function App() {
                 </Col>
                 <Col xs="2">
                   <label>Indicador</label>
-                  <select className="custom-select mr-sm-2" onChange={function (event) {
-                    setIndicador(event.target.value);
-                    setIndicadorTexto(event.target.value);
-                  }}>
-                    {(indicadorTexto &&
-                      <option value="">{indicadorTexto}</option>)
-                      ||
-                      <option value="">Escolha uma opção</option>
+                  <Select options={opcoesIndicador}
+                    onChange={
+                      (event) => { setIndicadorOption(event); setIndicador(event.value) }
                     }
-                    <option value="bid" name="Valor de compra">Valor de compra</option>
-                    <option value="ask">Valor de venda</option>
-                    <option value="high">Valor Máximo</option>
-                    <option value="low">Valor Mínimo</option>
-                    <option value="pctChange">Variação %</option>
-                  </select>
+                    value={indicadorOption}
+                  />
                 </Col>
                 <Col xs="1"  >
                   <Button className="bg-success" onClick={() => GerarRelatorio()}>
@@ -244,10 +233,65 @@ function App() {
   function Corpo() {
     return (
       <div className="corpo">
+        <Container className="container-cabecalho" >
+          <Row className="align-items-center row-text-align-center">
+            <Col xs="1"></Col>
+            {
+              dadosRelatorio
+              &&
+              <Col xs="10" className="grafico" >
+                <Grafico />
+              </Col>
+            }
+
+            <Col xs="1"></Col>
+          </Row>
+        </Container>
       </div>
     )
   }
 
+
+
+
+  function Grafico() {
+
+    var pontosRelatorio = []
+    switch(indicador){
+      case "high":
+        pontosRelatorio = dadosRelatorio.map((dado) =>   Object.create({}, { x: { value: TimestampParaData(dado.timestamp) }, y:{value: dado.high} }))
+        break;
+    }
+
+    const series = React.useMemo(
+      () => ({
+        showPoints: true
+      }),
+      []
+    );
+    const axes = React.useMemo(
+      () => [
+        { primary: true, position: "bottom", type: "time" },
+        { position: "left", type: "linear", stacked: true }
+      ],
+      []
+    );
+
+
+
+    const data = React.useMemo(
+      () => [
+        {
+          label: moedaOption.label +" | " + indicadorOption.label,
+          datums: pontosRelatorio
+        }
+      ],
+      []
+    );
+    return (
+      <Chart data={data} series={series} axes={axes} tooltip />
+    );
+  }
 
 
   return (

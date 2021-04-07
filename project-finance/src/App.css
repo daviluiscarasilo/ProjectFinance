@@ -64,7 +64,11 @@ label{
 /* Classes de estilização do corpo do site */
 .corpo{
   background-image: linear-gradient( rgb(240, 240, 238),rgb(240, 240, 238), #99ff978f);
-  height: 80vh;
-  
+  height: 80vh; 
+  padding-top: 5em  ;
+}
+
+.grafico{
+  height: 30em;
 }
 /* Fim das classes de estilização do corpo */
