@@ -121,6 +121,8 @@ function App() {
   function Cabecalho() {
     return (
       <>
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
+      
         <div className="borda-cabecalho" variant="dark" >
           <Container className="container-cabecalho">
             <Row className="align-items-center">
