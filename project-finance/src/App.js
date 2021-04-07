@@ -257,9 +257,21 @@ function App() {
   function Grafico() {
 
     var pontosRelatorio = []
-    switch(indicador){
+    switch (indicador) {
       case "high":
-        pontosRelatorio = dadosRelatorio.map((dado) =>   Object.create({}, { x: { value: TimestampParaData(dado.timestamp) }, y:{value: dado.high} }))
+        pontosRelatorio = dadosRelatorio.map((dado) => Object.create({}, { x: { value: TimestampParaData(dado.timestamp) }, y: { value: dado.high } }))
+        break;
+      case "low":
+        pontosRelatorio = dadosRelatorio.map((dado) => Object.create({}, { x: { value: TimestampParaData(dado.timestamp) }, y: { value: dado.low } }))
+        break;
+      case "bid":
+        pontosRelatorio = dadosRelatorio.map((dado) => Object.create({}, { x: { value: TimestampParaData(dado.timestamp) }, y: { value: dado.bid } }))
+        break;
+      case "ask":
+        pontosRelatorio = dadosRelatorio.map((dado) => Object.create({}, { x: { value: TimestampParaData(dado.timestamp) }, y: { value: dado.ask } }))
+        break;
+      case "pctChange":
+        pontosRelatorio = dadosRelatorio.map((dado) => Object.create({}, { x: { value: TimestampParaData(dado.timestamp) }, y: { value: dado.pctChange } }))
         break;
     }
 
@@ -282,7 +294,7 @@ function App() {
     const data = React.useMemo(
       () => [
         {
-          label: moedaOption.label +" | " + indicadorOption.label,
+          label: moedaOption.label + " | " + indicadorOption.label,
           datums: pontosRelatorio
         }
       ],
