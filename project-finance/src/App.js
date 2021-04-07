@@ -53,6 +53,17 @@ function App() {
     , { value: 'pctChange', label: 'Variação %' }
   ]
 
+  const opcoesRelatorio = [
+    { value: 'line', label: 'Linhas' }
+    , { value: 'bar', label: 'Barras' }
+    , { value: 'bubble', label: 'Bolhas' }
+    , { value: 'area', label: 'Áreas' }
+  ]
+
+
+  const [tipoRelatorio, setTipoRelatorio] = useState("");
+  const [tipoRelatorioOption, setTipoRelatorioOption] = useState();
+
 
   const [erroValidacaoCampos, setErroValidacaoCampos] = useState("");
   const [erro, setErro] = useState("");
@@ -121,8 +132,7 @@ function App() {
   function Cabecalho() {
     return (
       <>
-      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
-      
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
         <div className="borda-cabecalho" variant="dark" >
           <Container className="container-cabecalho">
             <Row className="align-items-center">
@@ -237,7 +247,19 @@ function App() {
       <div className="corpo">
         <Container className="container-cabecalho" >
           <Row className="align-items-center row-text-align-center">
-            <Col xs="1"></Col>
+            {
+              dadosRelatorio
+              &&
+              <Col xs="1">
+                <label>Gráfico</label>
+                <Select options={opcoesRelatorio}
+                  onChange={
+                    (event) => { setTipoRelatorioOption(event); setTipoRelatorio(event.value) }
+                  }
+                  value={tipoRelatorioOption}
+                />
+              </Col>
+            }
             {
               dadosRelatorio
               &&
@@ -279,7 +301,8 @@ function App() {
 
     const series = React.useMemo(
       () => ({
-        showPoints: true
+        showPoints: true,
+        type: tipoRelatorio !== "" ? tipoRelatorio : "line"
       }),
       []
     );
