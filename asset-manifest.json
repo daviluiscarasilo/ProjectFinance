@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/ProjectFinance/static/css/main.ebd0c16b.chunk.css",
+    "main.js": "/ProjectFinance/static/js/main.68220259.chunk.js",
+    "main.js.map": "/ProjectFinance/static/js/main.68220259.chunk.js.map",
+    "runtime-main.js": "/ProjectFinance/static/js/runtime-main.ad472bd7.js",
+    "runtime-main.js.map": "/ProjectFinance/static/js/runtime-main.ad472bd7.js.map",
+    "static/css/2.323c88ee.chunk.css": "/ProjectFinance/static/css/2.323c88ee.chunk.css",
+    "static/js/2.39b74d83.chunk.js": "/ProjectFinance/static/js/2.39b74d83.chunk.js",
+    "static/js/2.39b74d83.chunk.js.map": "/ProjectFinance/static/js/2.39b74d83.chunk.js.map",
+    "index.html": "/ProjectFinance/index.html",
+    "static/css/2.323c88ee.chunk.css.map": "/ProjectFinance/static/css/2.323c88ee.chunk.css.map",
+    "static/css/main.ebd0c16b.chunk.css.map": "/ProjectFinance/static/css/main.ebd0c16b.chunk.css.map",
+    "static/js/2.39b74d83.chunk.js.LICENSE.txt": "/ProjectFinance/static/js/2.39b74d83.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ad472bd7.js",
+    "static/css/2.323c88ee.chunk.css",
+    "static/js/2.39b74d83.chunk.js",
+    "static/css/main.ebd0c16b.chunk.css",
+    "static/js/main.68220259.chunk.js"
+  ]
+}
