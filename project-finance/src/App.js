@@ -22,11 +22,6 @@ import { da } from 'date-fns/locale';
  * @returns Validação de dados e Relatório
  */
 function App() {
-  useEffect(() => {
-
-  })
-
-
   const opcoesMoeda = [
     { value: 'USD-BRL', label: 'USD-BRL (Dólar Comercial)' }
     , { value: 'USDT-BRL', label: 'USDT-BRL (Dólar Turismo)' }
@@ -75,7 +70,12 @@ function App() {
   const [indicadorOption, setIndicadorOption] = useState();
   const [dadosRelatorio, setDadosRelatorio] = useState(null);
 
-
+  
+  useEffect(() => {
+    if(ValidaDadosObrigatorios()){
+      GerarRelatorio();
+    }
+  },[moeda,dataInicial,dataFinal])
 
 
   function TimestampParaData(timestamp) {
@@ -156,7 +156,7 @@ function App() {
               <Row className="align-items-center row-text-align-center">
                 <Col xs="3" >
                   <label>Moeda</label>
-                  <Select options={opcoesMoeda}
+                  <Select placeholder="Selecione" options={opcoesMoeda}
                     onChange={
                       (event) => { setMoedaOption(event); setMoeda(event.value) }
                     }
@@ -173,7 +173,7 @@ function App() {
                 </Col>
                 <Col xs="2">
                   <label>Indicador</label>
-                  <Select options={opcoesIndicador}
+                  <Select placeholder="Selecione" options={opcoesIndicador}
                     onChange={
                       (event) => { setIndicadorOption(event); setIndicador(event.value) }
                     }
