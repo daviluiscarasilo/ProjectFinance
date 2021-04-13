@@ -70,12 +70,12 @@ function App() {
   const [indicadorOption, setIndicadorOption] = useState();
   const [dadosRelatorio, setDadosRelatorio] = useState(null);
 
-  
+
   useEffect(() => {
-    if(ValidaDadosObrigatorios()){
+    if (ValidaDadosObrigatorios()) {
       GerarRelatorio();
     }
-  },[moeda,dataInicial,dataFinal])
+  }, [moeda, dataInicial, dataFinal, indicador])
 
 
   function TimestampParaData(timestamp) {
@@ -87,7 +87,7 @@ function App() {
     return moeda !== "" && indicador !== "" && dataInicial !== "" && dataFinal !== ""
   }
   function ValidarDatas() {
-    return dataInicial < dataFinal
+    return dataInicial < dataFinal &&  Math.ceil(Math.abs(dataFinal.getTime() - dataInicial.getTime()) / (1000 * 3600 * 24)) < 30
   }
   function ValidaCampos() {
     var status = true;
@@ -99,7 +99,7 @@ function App() {
     }
 
     if (!ValidarDatas()) {
-      mensagemErro += "\n Data final não pode ser menor  ou igual  a data inicial;"
+      mensagemErro += "\n Data final não pode ser menor  ou igual  a data inicial e o intervalo não pode ser maior que 30 dias;"
       status &= false;
     }
     if (mensagemErro !== "")
