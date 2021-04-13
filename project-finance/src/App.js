@@ -62,7 +62,7 @@ function App() {
 
   const [erroValidacaoCampos, setErroValidacaoCampos] = useState("");
   const [erro, setErro] = useState("");
-  const [dataInicial, setDataInicial] = useState(new Date().setDate(new Date().getDate() - 1));
+  const [dataInicial, setDataInicial] = useState(new Date(new Date().setDate(new Date().getDate() - 1)));
   const [dataFinal, setDataFinal] = useState(new Date());
   const [moeda, setMoeda] = useState("");
   const [moedaOption, setMoedaOption] = useState();
